@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row space-top">
+      <div class="col-md-12">
+          <h1>Welcome to Furniture System</h1>
+          <p>Select furniture from the catalog to view details.</p>
+      </div>
+  </div>
+      <div class="row space-top">
+          <div *ngFor="let furniture of furnitures | paginate:{
+              id:'allFurniture',
+              itemsPerPage:pageSize,
+              currentPage:currentPage
+          }" class="col-md-4">
+              <div class="card text-white bg-primary">
+                  <div class="card-body">
+                      <blockquote class="card-blockquote">
+                          <img src="{{furniture.image}}" style="width: 50%"/>
+                          <p>{{furniture.description}}</p>
+                          <footer>
+                              <cite title="Source Title">{{furniture.title}}</cite>
+                          </footer>
+                          <div class="pull-right">
+                              <a routerLink="/furniture/details/{{furniture.id}}" class="btn btn-info">Details</a>
+                              <a *ngIf="authService.isAdmin()" routerLink="/furniture/edit/{{furniture.id}}" class="btn btn-success">Edit</a>
+                              <a *ngIf="authService.isAdmin()" (click)="deleteItem(furniture.id)" class="btn btn-danger">Delete</a>
+                          </div>
+                      </blockquote>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <pagination-controls 
+        id="allFurniture"
+        (pageChange)="changePage($event)"
+        maxSize="9"
+        directionLinks="true"
+        autoHide="true"
+        previousLabel="Previous"
+        nextLabel="Next"
+        screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page"
+        screenReaderCurrentLabel="You're on page">
+      </pagination-controls>
+</div>
