@@ -1,0 +1,13 @@
+<div id="wrapper">
+  <app-search-room [getAllHotels]="getAllHotels"></app-search-room>
+  <div id="rightcolumn">
+    <div *ngIf="hotels">
+       <div *ngFor="let hotel of hotels">
+          <app-hotel [hotel]="hotel"></app-hotel>
+       </div>
+    </div>                  
+  </div>
+</div>
+
+
+

@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+}
+
+#wrapper {
+     width: 1005px;
+     margin: 0 auto;
+    position: relative;
+}
+#leftcolumn, #rightcolumn {
+    border: 1px solid white;
+    min-height: 750px;
+    color: white;
+}
+#leftcolumn {
+     width: 250px;
+     background-color:blanchedalmond;
+    min-height: 100px;
+    position: fixed;
+}
+#rightcolumn {
+     width: 750px;
+    float: right;
+}
+
+.input{
+    width: 60%;
+    margin: auto;
+    margin-bottom: 5px;
+}

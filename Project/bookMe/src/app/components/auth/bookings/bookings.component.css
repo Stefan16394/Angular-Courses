@@ -1,0 +1,10 @@
+#booking{
+    border: solid;
+    width: 70%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#booking-text{
+    display: inline;
+}

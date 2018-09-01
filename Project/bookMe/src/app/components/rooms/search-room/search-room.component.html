@@ -1,0 +1,13 @@
+<div id="leftcolumn">
+    Search hotels:
+    <form #searchForm="ngForm" (ngSubmit)="search(searchForm)">
+    <input type="text" ngModel required name="city" class="form-control input" placeholder="Enter destination">
+    <input type="date" ngModel required name="from_date" class="form-control input"  placeholder="Enter check in date">
+    <input type="date" ngModel required name="to_date" class="form-control input" placeholder="Enter check out date">
+
+    <button type="submit" class="btn btn-info">Search</button>
+  </form>
+  <div class="alert alert-danger" *ngIf="error">
+     {{error}}
+  </div>
+</div>

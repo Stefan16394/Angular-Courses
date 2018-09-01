@@ -1,0 +1,74 @@
+<div *ngIf="hotel && rooms && soldRooms; else loading" class="card">
+  <div *ngIf="hotel" class="card-body">
+    <img class="card-img-top" src="{{hotel.img}}" alt="Card image cap" style="width: 40%">
+    <h4 class="card-title">{{hotel.name}} - {{hotel.city | titlecase}}</h4>
+    <p class="card-text">{{hotel.description}}</p>
+    <div *ngIf="authService.checkIfLogged()">
+      <form *ngIf="canRate" #rateForm="ngForm" (ngSubmit)="rate(rateForm)">
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Feel free to rate us!</label>
+          <select name="select" ngModel class="form-control">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option selected>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+          <button type="submit" class="">Submit</button>
+        </div>
+        </form>
+    </div>   
+    <p> {{rating}}
+      <img style="width:30px" src="https://cdn.dribbble.com/users/411234/screenshots/2427834/star_1x.png">
+    </p>
+  </div>
+ 
+  <a *ngIf="authService.isAdmin()" class="btn btn-primary alert alert-success" routerLink='/admin/room/create/{{hotel.city}}/{{hotel._id}}'>Create Room</a>
+
+  <div *ngIf="rooms" class="card" style="width: 100%;">
+    <div *ngFor="let room of rooms">
+          <div class="card-body">
+              <img style="width:20%;" src="{{room.img}}">
+              <h5 class="card-title">{{room.description}}</h5>
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Persons</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">{{room.persons}}</th>
+                      <td>{{room.price}} $</td>
+                      <td>{{countDays(room)}} $</td>
+                      <td> <button class="btn btn-primary" (click)="bookRoom(room)">Book Room</button></td>
+                    </tr>
+                  </tbody>
+                </table>   
+                <div *ngIf="authService.isAdmin()">
+                  <a class="btn btn-primary alert alert-primary" routerLink='/admin/room/edit/{{room._id}}'>Edit Room</a>
+                  <a class="btn btn-primary alert alert-warning" (click)='deleteRoom(room._id)'>Delete Room</a>
+                </div>
+              </div>
+    </div>
+    <div *ngFor="let room of soldRooms">
+        <div class="card-body">
+            <img style="width:20%;" src="{{room.img}}">
+            <h5 class="card-title">{{room.description}}</h5>
+            <td> <a disabled href="#" class="btn btn-primary alert alert-danger">SOLD OUT</a></td>
+            <div *ngIf="authService.isAdmin()">
+                <a class="btn btn-primary alert alert-primary" routerLink='/admin/room/edit/{{room._id}}'>Edit Room</a>
+                <a class="btn btn-primary alert alert-warning" (click)='deleteRoom(room._id)'>Delete Room</a>
+            </div>
+          </div>
+    </div>
+  </div> 
+</div>
+
+<ng-template #loading>
+  <img class="imgLoading" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5w_y5RJCib2sCrKnj34SHc7jIOWePzu0Gm7vPzOJ56X791EfE">
+</ng-template>
+

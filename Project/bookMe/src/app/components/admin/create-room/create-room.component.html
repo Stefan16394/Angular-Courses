@@ -1,0 +1,48 @@
+<h1 id="title">Create room</h1>
+<form #createForm="ngForm" (ngSubmit)="submit($event)">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Type</label>
+    <input type="text" name="description" class="form-control" placeholder="Enter room type"
+    [(ngModel)]="model.description" 
+    required
+    minlength="1"
+    #type="ngModel" >
+    <div class="alert alert-danger" *ngIf="!type.valid && type.dirty">
+      Room type should not be empty.
+   </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Image</label>
+    <input type="text" name="img" class="form-control" placeholder="Enter imageUrl"
+    [(ngModel)]="model.img" 
+    required
+    #img="ngModel"> 
+    <div class="alert alert-danger" *ngIf="!img.valid && img.dirty">
+     Image is required.
+   </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Persons</label>
+    <input type="number" name="persons" class="form-control" placeholder="Enter number of persons"
+    [(ngModel)]="model.persons" 
+    min="1"
+    required
+    #persons="ngModel"> 
+    <div class="alert alert-danger" *ngIf="!persons.valid && persons.dirty">
+     Persons is required.
+   </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Price for night</label>
+    <input type="number" name="price" class="form-control" placeholder="Price for night"
+    min="1"
+    required
+    [(ngModel)]="model.price" 
+    #price="ngModel"> 
+    <div class="alert alert-danger" *ngIf="!price.valid && price.dirty">
+     Price is required.
+    </div>
+  </div>
+ 
+  <button [disabled]="createForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+</form>

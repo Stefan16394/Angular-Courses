@@ -1,0 +1,9 @@
+#leftcolumn {
+    width: 250px;
+    background-color:blanchedalmond;
+    min-height: 100px;
+
+    position: absolute;
+    border: 1px solid white;
+    color: black;
+}

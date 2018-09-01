@@ -1,0 +1,27 @@
+<h1 id="title">Register account</h1>
+<form #registerForm="ngForm" (ngSubmit)="submit($event)">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
+    [(ngModel)]="model.username" 
+    required
+    pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+    #email="ngModel" >
+    <div class="alert alert-danger" *ngIf="!email.valid && email.dirty">
+      Invalid email format.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+    [(ngModel)]="model.password" 
+    pattern="^[A-Za-z0-9]{4,16}$"
+    #password="ngModel"> 
+    <div class="alert alert-danger" *ngIf="!password.valid && password.dirty">
+      Password must contain only letters and digits and must be between 4 and 16 symbols.
+    </div>
+   
+  </div>
+   
+  <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+</form> 
